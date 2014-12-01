@@ -182,7 +182,7 @@
 	{
 		$smcFunc['db_query']('', '
 			DELETE FROM {db_prefix}drafts
-			WHERE id_member IN ({array_int:users})',
+			WHERE member_id IN ({array_int:users})',
 			array(
 				'users' => $users
 			)

@@ -3,6 +3,12 @@ Changelog started July 31, 2010.
 Changelog last updated January 1, 2014.
 
 
+2.0.4
+================================================================================
+! An icon was misaligned
+! Several areas used the wrong URL
+! Wrong column name in a query
+
 2.0.3
 ================================================================================
 ! Members could see each other's drafts
