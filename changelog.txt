@@ -1,7 +1,15 @@
 Changes go downward, versions go upward.  Please scroll to the bottom for a legend.
 Changelog started July 31, 2010.
-Changelog last updated January 1, 2014.
+Changelog last updated December 1, 2014.
 
+
+2.1
+================================================================================
+! Users could see each others' drafts in the profile area 
+- Remove support for SMF 1.1.x 
++ Added it_it (thanks Flavio93Zena) 
+! Wrong variable used (thanks TourFL) 
++ Added pt_br (thanks DSystem) 
 
 2.0.5
 ================================================================================
