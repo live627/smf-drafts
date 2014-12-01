@@ -6,25 +6,6 @@
 	<version>2.0.5</version>
 	<type>modification</type>
 
-	<install for="1.1 - 1.1.99">
-		<modification format="xml" type="file">install1-1.xml</modification>
-
-		<!-- Source files -->
-		<require-file name="smf1-1/Sources/Drafts.php" destination="$sourcedir" />
-
-		<!-- Theme files -->
-		<require-file name="smf1-1/Themes/default/Drafts.template.php" destination="$themedir" />
-		<require-file name="images/icons/edit.gif" destination="$themedir/images/icons" />
-
-		<!-- Language files -->
-		<require-file name="languages/Drafts.english.php" destination="$languagedir" />
-		<require-file name="languages/Drafts.english-utf8.php" destination="$languagedir" />
-
-		<!-- Install scripts -->
-		<code>install1-1.php</code>
-
-	</install>
-
 	<install for="2.0 - 2.99.99">
 		<modification format="xml" type="file">install2.xml</modification>
 
@@ -39,32 +20,13 @@
 		<require-file name="languages/Drafts.english.php" destination="$languagedir" />
 		<require-file name="languages/Drafts.english-utf8.php" destination="$languagedir" />
 		<require-file name="languages/Drafts.portuguese_brazilian-utf8.php" destination="$languagedir" />
-        <require-file name="languages/Drafts.portuguese_pt-utf8.php" destination="$languagedir" />
-        <require-file name="languages/Drafts.italian-utf8.php" destination="$languagedir" />
+		<require-file name="languages/Drafts.portuguese_pt-utf8.php" destination="$languagedir" />
+		<require-file name="languages/Drafts.italian-utf8.php" destination="$languagedir" />
 
 		<!-- Install scripts -->
 		<database>install2.php</database>
 
 	</install>
-
-	<uninstall for="1.1 - 1.1.99">
-		<modification format="xml" type="file" reverse="true">install1-1.xml</modification>
-
-		<!-- Source files -->
-		<remove-file name="$sourcedir/Drafts.php" />
-
-		<!-- Theme files -->
-		<remove-file name="$themedir/Drafts.template.php" />
-		<remove-file name="$themedir/images/icons/edit.gif" />
-
-		<!-- Language files -->
-		<remove-file name="$languagedir/Drafts.english.php" />
-		<remove-file name="$languagedir/Drafts.english-utf8.php" />
-		<remove-file name="$languagedir/Drafts.portuguese_brazilian-utf8.php" />
-		<remove-file name="$languagedir/Drafts.portuguese_pt-utf8.php" />
-		<remove-file name="$languagedir/Drafts.italian-utf8.php" />
-
-	</uninstall>
 
 	<uninstall for="2.0 - 2.99.99">
 		<modification format="xml" type="file" reverse="true">install2.xml</modification>
@@ -79,8 +41,9 @@
 		<!-- Language files -->
 		<remove-file name="$languagedir/Drafts.english.php" />
 		<remove-file name="$languagedir/Drafts.english-utf8.php" />
-        <remove-file name="$languagedir/Drafts.portuguese_brazilian-utf8.php" />
-        <remove-file name="$languagedir/Drafts.portuguese_pt-utf8.php" />
+		<remove-file name="$languagedir/Drafts.portuguese_brazilian-utf8.php" />
+		<remove-file name="$languagedir/Drafts.portuguese_pt-utf8.php" />
+		<remove-file name="$languagedir/Drafts.italian-utf8.php" />
 
 	</uninstall>
 
