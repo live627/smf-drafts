@@ -55,7 +55,7 @@ function template_show_drafts()
 				<td align="right">', $draft['last_saved'], '</td>
 				<td align="center"><a href="', $draft['edit'], '" title="', $txt['drafts'][9], '"><img src="', $settings['images_url'], '/icons/edit.gif" alt="', $txt['drafts'][9], '" /></a></td>
 				<td align="center"><a href="', $draft['post'], '" onclick="return confirm(\'', $txt['drafts'][13], '\');">', $txt['drafts'][10], '</a></td>
-				<td align="center">$context['page_ti$context['page_title']tle']
+				<td align="center">
 					<input type="hidden" name="sc" value="', $context['session_id'], '" />
 					<input type="checkbox" name="drafts-delete[]" value="', $id, '" class="check" />
 				</td>

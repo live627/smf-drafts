@@ -3,6 +3,10 @@ Changelog started July 31, 2010.
 Changelog last updated January 1, 2014.
 
 
+2.0.5
+================================================================================
+! Parse error in template (thanks @emanuele45)
+
 2.0.4
 ================================================================================
 ! An icon was misaligned
