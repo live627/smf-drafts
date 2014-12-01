@@ -16,10 +16,10 @@ function template_show_drafts()
 	global $context, $settings, $txt, $scripturl;
 
 	echo '
-		<form action="', $scripturl, '?action=profile;area=showdrafts;u=', $context['user']['id'], '" method="post" accept-charset="', $context['character_set'], '">
+		<form action="', $scripturl, '?action=profile;area=show_drafts;u=', $context['user']['id'], '" method="post" accept-charset="', $context['character_set'], '">
 		<div class="cat_bar">
 			<h3 class="catbg">
-				<span class="ie6_header floatleft"><img src="', $settings['images_url'], '/icons/profile_sm.gif" alt="" align="top" />&nbsp;', $txt['drafts'][2], '</span>
+				<span class="ie6_header floatleft"><img class="icon" src="', $settings['images_url'], '/icons/profile_sm.gif" alt="" align="top" />&nbsp;', $txt['drafts'][2], '</span>
 			</h3>
 		</div>
 
@@ -55,7 +55,7 @@ function template_show_drafts()
 				<td align="right">', $draft['last_saved'], '</td>
 				<td align="center"><a href="', $draft['edit'], '" title="', $txt['drafts'][9], '"><img src="', $settings['images_url'], '/icons/edit.gif" alt="', $txt['drafts'][9], '" /></a></td>
 				<td align="center"><a href="', $draft['post'], '" onclick="return confirm(\'', $txt['drafts'][13], '\');">', $txt['drafts'][10], '</a></td>
-				<td align="center">
+				<td align="center">$context['page_ti$context['page_title']tle']
 					<input type="hidden" name="sc" value="', $context['session_id'], '" />
 					<input type="checkbox" name="drafts-delete[]" value="', $id, '" class="check" />
 				</td>
@@ -96,7 +96,7 @@ function template_drafts_post_list_of_drafts()
 				<span class="ie6_header floatleft">', $txt['drafts'][3], '</span>
 			</h3>
 		</div>
-		<form action="', $scripturl, '?action=profile;area=showdrafts;u=', $context['user']['id'], '" method="post" accept-charset="', $context['character_set'], '">
+		<form action="', $scripturl, '?action=profile;area=show_drafts;u=', $context['user']['id'], '" method="post" accept-charset="', $context['character_set'], '">
 			<table border="0" width="100%" cellspacing="1" cellpadding="5" class="bordercolor" align="center">
 				<tr class="titlebg">
 					<th align="left">', $txt['drafts'][5], '</th>

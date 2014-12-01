@@ -3,6 +3,10 @@ Changelog started July 31, 2010.
 Changelog last updated January 1, 2014.
 
 
+2.0.3
+================================================================================
+! Members could see each other's drafts
+
 2.0.2
 ================================================================================
 ! Simple permissions drafts category had no title (thanks jm_araujo)

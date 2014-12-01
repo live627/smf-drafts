@@ -405,9 +405,6 @@ function drafts_profile_show_drafts($member_id)
 {
 	global $context;
 
-	if ((!$context['user']['is_owner'] || !allowedTo('profile_view_own') || !allowedTo('save_drafts')) && !allowedTo('profile_view_any'))
-		redirectexit('action=profile;u=' . $member_id);
-
 	loadTemplate('Drafts');
 
 	global $txt, $scripturl, $smcFunc;
@@ -438,7 +435,7 @@ function drafts_profile_show_drafts($member_id)
 		);
 
 		// send them back to where they came from
-		redirectexit(preg_replace('~;draft=([0-9]+)~', '', str_replace('action=post2;', 'action=post;', $_SESSION['old_url'])));
+			redirectexit(preg_replace('~;draft=([0-9]+)~', '', str_replace('action=post2;', 'action=post;', $_SESSION['old_url'])));
 	}
 
 	// are we posting a draft as a topic?
