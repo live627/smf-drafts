@@ -139,7 +139,7 @@
 					'file' => 'Drafts.php',
 					'function' => 'drafts_profile_show_drafts',
 					'permission' => array(
-						'own' => array('profile_view_own', 'profile_view_any'),
+						'own' => array('profile_view_own'),
 						'any' => 'profile_view_any',
 					),
 				),
