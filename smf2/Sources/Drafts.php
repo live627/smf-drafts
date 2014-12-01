@@ -620,7 +620,7 @@ function drafts_profile_show_drafts($member_id)
 						'name' => $user_info['name'],
 						'poster' => $user_info['id'],
 						'msg' => $msgOptions['id'],
-						'board' => $boardOptions['board'],
+						'board' => $topicOptions['board'],
 						'topic' => $topicOptions['id']
 					);
 
