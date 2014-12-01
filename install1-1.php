@@ -1,15 +1,15 @@
 <?php
 /*
 	Drafts Modification for SMF 2.0/1.1
-	
+
 	Created by:		Charles Hill
 	Website:		http://www.degreesofzero.com/
-	
+
 	Copyright 2008 - 2010.  All Rights Reserved.
-	
-	
+
+
 	This script is meant to be run either from the package manager or directly by URL.
-	
+
 	ATTENTION: If you are MANUALLY installing or upgrading with this package, please access
 	it directly, with a URL like the following:
 		http://www.yourdomain.com/forum/upgrade1-1-201.php (or similar)
@@ -41,25 +41,25 @@ if (mysql_num_rows(db_query("SHOW TABLES LIKE '{$db_prefix}drafts'", __FILE__, _
 	) as $k => $sql)
 		if (mysql_num_rows(db_query("SHOW COLUMNS FROM {$db_prefix}drafts LIKE '$k'", __FILE__, __LINE__)) == 0)
 			$add_columns[] = '`' . $k . '` ' . $sql;
-	
+
 	unset($k, $sql);
-	
+
 	// add the columns that don't already exist
 	if (!empty($add_columns))
 		db_query("
 			ALTER TABLE {$db_prefix}drafts
 				" . implode(',
 				ADD ', $add_columns), __FILE__, __LINE__);
-	
+
 	unset($add_columns);
 
 	$request = db_query("
 		SELECT draftID, memberID, boardID, topicID, timestamp, locked, isSticky, smileysEnabled, icon, body, subject
 		FROM {$db_prefix}drafts", __FILE__, __LINE__);
-	
+
 	while ($row = mysql_fetch_assoc($request))
 		$insert_drafts[] = "(" . (int) $row['draftID'] . ", " . (int) $row['memberID'] . ", " . (int) $row['boardID'] . ", " . (int) $row['topicID'] . ", " . (int) $row['timestamp'] . ", " . (int) $row['locked'] . ", " . (int) $row['isSticky'] . ", " . (int) $row['smileysEnabled'] . ", SUBSTRING('$row[icon]', 1, 16), '" . mysql_real_escape_string(str_replace('\'', '&#39;', un_htmlspecialchars(stripslashes($row['body'])))) . "', SUBSTRING('" . mysql_real_escape_string(str_replace('\'', '&#39;', un_htmlspecialchars(stripslashes($row['subject'])))) . "', 1, 255))";
-	
+
 	mysql_free_result($request);
 
 	// just so we're sure we set up the table properly

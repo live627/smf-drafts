@@ -1,15 +1,15 @@
 <?php
 /*
 	Drafts Modification for SMF 2.0/1.1
-	
+
 	Created by:		Charles Hill
 	Website:		http://www.degreesofzero.com/
-	
+
 	Copyright 2008 - 2010.  All Rights Reserved.
-	
-	
+
+
 	This script is meant to be run either from the package manager or directly by URL.
-	
+
 	ATTENTION: If you are MANUALLY installing or upgrading with this package, please access
 	it directly, with a URL like the following:
 		http://www.yourdomain.com/forum/upgrade1-1-201.php (or similar)
@@ -34,13 +34,13 @@ if ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW TABLES LIKE {string:t
 	// Spuds had attached his own version (for SMF 2.0) in the drafts mod's support topic
 	elseif ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW COLUMNS FROM {db_prefix}drafts LIKE {string:column}', array('column' => 'poll'))) == 0)
 		$drafts['prev_version'] = 'Spuds';
-	
+
 	if (!empty($drafts['prev_version']))
 	{
 		if ($drafts['prev_version'] == '1.0x')
 		{
 			$add_columns = array();
-		
+
 			// for backwards compatibility... make sure these columns are in the existing table
 			foreach (array(
 				'locked' => 'tinyint(4) unsigned NOT NULL default {int:zero}',
@@ -51,9 +51,9 @@ if ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW TABLES LIKE {string:t
 			) as $k => $sql)
 				if ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW COLUMNS FROM {db_prefix}drafts LIKE {string:column}', array('column' => $k))) == 0)
 					$add_columns[] = '`' . $k . '` ' . $sql;
-			
+
 			unset($k, $sql);
-			
+
 			// add the columns that don't already exist
 			if (!empty($add_columns))
 				$smcFunc['db_query']('', '
@@ -65,9 +65,9 @@ if ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW TABLES LIKE {string:t
 						'icon_default' => 'xx'
 					)
 				);
-			
+
 			unset($add_columns);
-		
+
 			$request = $smcFunc['db_query']('', '
 				SELECT draftID, memberID, boardID, topicID, timestamp, locked, isSticky, smileysEnabled, icon, body, subject
 				FROM {db_prefix}drafts'
@@ -78,18 +78,18 @@ if ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW TABLES LIKE {string:t
 				SELECT draft_id, member_id, board_id, topic_id, timestamp, locked, is_sticky, smileys_enabled, icon, body, subject
 				FROM {db_prefix}drafts'
 			);
-		
+
 		// let's us figure out which function to use for escaping a string that we want to insert into the db
 		$dbresf = array(
 			'MySQL' => 'mysql_real_escape_string',
 			'PostgreSQL' => 'pg_escape_string',
 			'SQLite' => 'sqlite_escape_string'
 		);
-		
+
 		while ($row = $smcFunc['db_fetch_row']($request))
 		{
 			$drafts['insert'][] = '({int:draft_id' . $row[0] . '}, {int:member_id' . $row[0] . '}, {int:board_id' . $row[0] . '}, {int:topic_id' . $row[0] . '}, {int:timestamp' . $row[0] . '}, {int:locked' . $row[0] . '}, {int:is_sticky' . $row[0] . '}, {int:smileys_enabled' . $row[0] . '}, {string:icon' . $row[0] . '}, {string:body' . $row[0] . '}, {string:subject' . $row[0] . '})';
-			
+
 			$drafts['values'] += array(
 				'draft_id' . $row[0] => (int) $row[0],
 				'member_id' . $row[0] => (int) $row[1],
@@ -104,9 +104,9 @@ if ($smcFunc['db_num_rows']($smcFunc['db_query']('', 'SHOW TABLES LIKE {string:t
 				'subject' . $row[0] => substr($dbresf[$smcFunc['db_title']](str_replace('\'', '&#39;', un_htmlspecialchars(stripslashes($row[10])))), 0, 255)
 			);
 		}
-		
+
 		$smcFunc['db_free_result']($request);
-	
+
 		// just so we're sure we set up the table properly
 		$smcFunc['db_query']('', '
 			DROP TABLE IF EXISTS {db_prefix}drafts'
@@ -149,7 +149,7 @@ if (!empty($drafts['insert']))
 
 unset($drafts);
 
-// All Done	
+// All Done
 if (SMF == 'SSI')
    echo 'Congratulations! You have successfully installed this mod!';
 

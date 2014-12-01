@@ -1,7 +1,14 @@
 Changes go downward, versions go upward.  Please scroll to the bottom for a legend.
 Changelog started July 31, 2010.
-Changelog last updated August 2, 2010.
+Changelog last updated January 1, 2014.
 
+
+2.0.2
+================================================================================
+! Simple permissions drafts category had no title (thanks jm_araujo)
+! Profile title caused error in log; also clean up (thanks jm_araujo)
+! Error in log when posting a new topic from a draft (thanks jm_araujo)
++ Added pt_PT (thanks jm_araujo)
 
 2.0.1
 ================================================================================

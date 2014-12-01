@@ -1,10 +1,10 @@
 <?php
 /*
 	Drafts Modification for SMF 2.0/1.1.x
-	
+
 	Created by:		Charles Hill
 	Website:		http://www.degreesofzero.com/
-	
+
 	Copyright 2008 - 2010.  All Rights Reserved.
 */
 
@@ -13,6 +13,7 @@ if (!defined('SMF'))
 
 // for ManagePermissions.php
 $txt['permissiongroup_drafts'] = 'Drafts';
+$txt['permissiongroup_simple_drafts'] = 'Drafts';
 $txt['permissionname_save_drafts'] = 'Can save topics and replies as drafts';
 
 $txt['drafts'] = array(
