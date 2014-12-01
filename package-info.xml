@@ -40,6 +40,7 @@
 		<require-file name="languages/Drafts.english-utf8.php" destination="$languagedir" />
 		<require-file name="languages/Drafts.portuguese_brazilian-utf8.php" destination="$languagedir" />
         <require-file name="languages/Drafts.portuguese_pt-utf8.php" destination="$languagedir" />
+        <require-file name="languages/Drafts.italian-utf8.php" destination="$languagedir" />
 
 		<!-- Install scripts -->
 		<database>install2.php</database>
@@ -59,6 +60,9 @@
 		<!-- Language files -->
 		<remove-file name="$languagedir/Drafts.english.php" />
 		<remove-file name="$languagedir/Drafts.english-utf8.php" />
+		<remove-file name="$languagedir/Drafts.portuguese_brazilian-utf8.php" />
+		<remove-file name="$languagedir/Drafts.portuguese_pt-utf8.php" />
+		<remove-file name="$languagedir/Drafts.italian-utf8.php" />
 
 	</uninstall>
 
