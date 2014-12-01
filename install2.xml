@@ -140,7 +140,6 @@
 					'function' => 'drafts_profile_show_drafts',
 					'permission' => array(
 						'own' => array('profile_view_own'),
-						'any' => 'profile_view_any',
 					),
 				),
 				'permissions' => array(]]></add>
@@ -153,7 +152,7 @@
 
 <add><![CDATA[if (isset($profile_areas['info']['areas']['show_drafts']))
 	{
-		if (file_exists($sourcedir . '/Drafts.php') && (($context['user']['is_owner'] && allowedTo('profile_view_own') && allowedTo('save_drafts')) || allowedTo('profile_view_any')))
+		if (file_exists($sourcedir . '/Drafts.php') && (($context['user']['is_owner'] && allowedTo('profile_view_own') && allowedTo('save_drafts'))))
 		{
 			require_once($sourcedir . '/Drafts.php');
 
