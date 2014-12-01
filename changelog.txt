@@ -1,0 +1,27 @@
+Changes go downward, versions go upward.  Please scroll to the bottom for a legend.
+Changelog started July 31, 2010.
+Changelog last updated August 2, 2010.
+
+
+2.0.1
+================================================================================
+! Fixed Sticky problem
+! Fixed breaking-spaces and general html entities problems
+! Log actions, notifications, member post count updates, and mark read now done properly after posting a draft using "Post it!"
+! Improved redirects (after deleting / posting drafts)
+! Minimized edits to SMF Source files by separating Drafts source code into its own source file
+! Eliminated edits to SMF Language files by separating Drafts txt strings into its own language files
+! Minimized edits to SMF Template files by separating Drafts templates into its own template file
+! Eliminated inline css
+- Dropped support for other modifications
++ Polls now supported
++ Added board select on post form for new topics
++ Support for SMF 2.0 added
+
+
+
+Legend:
+--------------------------------------------------------------------------------
+! Minor change or bugfix.
++ Feature addition or improvement.
+- Feature or option removal.

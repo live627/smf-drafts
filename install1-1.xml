@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>charlesh:drafts</id>
+	<version>2.0.1</version>
+
+
+<file name="$boarddir/index.php">
+
+	<operation>
+		
+<search position="before"><![CDATA[// Load the current user's permissions.
+	loadPermissions();]]></search>
+
+<add><![CDATA[
+	
+	if (file_exists($sourcedir . '/Drafts.php'))
+		loadLanguage('Drafts');]]></add>
+
+	</operation>
+
+</file>
+
+
+<file name="$sourcedir/ManagePermissions.php">
+
+	<operation>
+	
+<search position="after"><![CDATA['pm' => array(]]></search>
+
+<add><![CDATA['drafts' => array(
+				'save_drafts' => false,
+			),
+			]]></add>
+
+	</operation>
+	
+	<operation>
+	
+<search position="before"><![CDATA[$non_guest_permissions = array(]]></search>
+
+<add><![CDATA[
+		'save_drafts',]]></add>
+
+	</operation>
+	
+</file>
+
+
+<file name="$sourcedir/Post.php">
+
+	<operation>
+	
+<search position="replace"><![CDATA[if (isset($_REQUEST['poll']))
+		$context['page_title'] = $txt['smf20'];]]></search>
+
+<add><![CDATA[if (isset($context['draft_saved']) && $context['draft_saved'] === true)
+		$context['page_title'] = $txt['drafts'][15];
+	elseif (isset($_REQUEST['poll']))
+		$context['page_title'] = $txt['smf20'];]]></add>
+
+	</operation>
+
+	<operation>
+	
+<search position="after"><![CDATA[// ...or attach a new file...]]></search>
+
+<add><![CDATA[global $sourcedir;
+	
+	if (!isset($_REQUEST['msg']) && file_exists($sourcedir . '/Drafts.php') && allowedTo('save_drafts'))
+	{
+		require_once($sourcedir . '/Drafts.php');
+		
+		// maybe we are trying to save this as a draft?
+		if (!empty($_POST['drafts-save_as_draft']))
+		{
+			drafts_save_draft();
+			return Post();
+		}
+		
+		// if we got this far we don't need this draft anymore... so delete it
+		if (!empty($_POST['drafts-draft_id']))
+			drafts_delete_draft($_POST['drafts-draft_id']);
+	}
+
+	]]></add>
+
+	</operation>
+
+	<operation>
+	
+<search position="before"><![CDATA[$context['make_poll'] = isset($_REQUEST['poll']);]]></search>
+
+<add><![CDATA[
+
+	global $sourcedir;
+	
+	if (file_exists($sourcedir . '/Drafts.php') && allowedTo('save_drafts'))
+	{
+		require_once($sourcedir . '/Drafts.php');
+		
+		// loads an individual draft (populates variables used in post form)
+		if (!empty($_REQUEST['draft']))
+			drafts_load_draft();
+		
+		// load list of drafts
+		$context['list_of_drafts'] = drafts_load_list_of_drafts();
+	}]]></add>
+
+	</operation>
+	
+</file>
+
+
+<file name="$sourcedir/Profile.php">
+
+	<operation>
+	
+<search position="before"><![CDATA['showPosts' => array(array('profile_view_any', 'profile_view_own'), array('profile_view_any')),]]></search>
+
+<add><![CDATA[
+		'show_drafts' => array(array('profile_view_any', 'profile_view_own'), array('profile_view_any')),]]></add>
+
+	</operation>
+
+	<operation>
+	
+<search position="before"><![CDATA[$context['user']['is_owner'] = $memID == $ID_MEMBER;]]></search>
+
+<add><![CDATA[
+	
+	if (isset($sa_allowed['show_drafts']) && (!file_exists($sourcedir . '/Drafts.php') || ((!$context['user']['is_owner'] || !allowedTo('profile_view_own') || !allowedTo('save_drafts')) && !allowedTo('profile_view_any'))))
+		unset($sa_allowed['show_drafts']);]]></add>
+
+	</operation>
+
+	<operation>
+	
+<search position="after"><![CDATA[// Set the menu items in the left bar...]]></search>
+
+<add><![CDATA[if (file_exists($sourcedir . '/Drafts.php') && (($context['user']['is_owner'] && allowedTo('profile_view_own') && allowedTo('save_drafts')) || allowedTo('profile_view_any')))
+	{
+		require_once($sourcedir . '/Drafts.php');
+		$num_drafts = drafts_get_num_drafts($memID);
+	}
+	
+	]]></add>
+
+	</operation>
+
+	<operation>
+	
+<search position="after"><![CDATA[// Groups with moderator permissions can also....]]></search>
+
+<add><![CDATA[if (file_exists($sourcedir . '/Drafts.php') && (($context['user']['is_owner'] && allowedTo('profile_view_own') && allowedTo('save_drafts')) || allowedTo('profile_view_any')))
+			$context['profile_areas']['info']['areas']['show_drafts'] = '<a href="' . $scripturl . '?action=profile;u=' . $memID . ';sa=show_drafts">' . $txt['drafts'][2] . '</a> <span class="smalltext">(' . $num_drafts . ')</span>';
+		
+		]]></add>
+
+	</operation>
+	
+</file>
+
+
+<file name="$sourcedir/Subs-Members.php">
+
+	<operation>
+	
+<search position="after"><![CDATA[// Delete personal messages.]]></search>
+
+<add><![CDATA[if (file_exists($sourcedir . '/Drafts.php'))
+	{
+		db_query("
+			DELETE FROM {$db_prefix}drafts 
+			WHERE member_id $condition", __FILE__, __LINE__);
+	}
+
+	]]></add>
+
+	</operation>
+
+</file>
+
+
+<file name="$themedir/Post.template.php">
+
+	<operation>
+		
+<search position="after"><![CDATA[// If an error occurred]]></search>
+
+<add><![CDATA[if (isset($context['draft_saved']) && $context['draft_saved'] === true)
+	{
+		echo '
+							<tr>
+								<td></td>
+								<td align="left">
+									<div id="drafts-success">', $txt['drafts'][1], '</div>
+								</td>
+							</tr>';
+	}
+	
+	]]></add>
+
+	</operation>
+
+	<operation>
+		
+<search position="replace"><![CDATA[is where it's at!
+	echo ']]></search>
+
+<add><![CDATA[is where it's at!
+	if (!isset($context['draft_saved']) || $context['draft_saved'] !== true)
+		echo ']]></add>
+
+	</operation>
+
+	<operation>
+		
+<search position="after"><![CDATA[// Now show the subject box for this post.]]></search>
+
+<add><![CDATA[// Drafts Modification for SMF 2.0 / 1.1
+	if (!$context['make_event'] && ($drafts_template_loaded = loadTemplate('Drafts', false)) !== false)
+		template_drafts_post_extra_inputs();
+	
+	]]></add>
+
+	</operation>
+
+	<operation>
+		
+<search position="after"><![CDATA[// Option to delete an event]]></search>
+
+<add><![CDATA[if (!$context['make_event'] && $drafts_template_loaded !== false)
+		template_drafts_post_save_as_draft_button();
+	
+	]]></add>
+
+	</operation>
+
+	<operation>
+		
+<search position="after"><![CDATA[// Now some javascript to hide the additional options on load...]]></search>
+
+<add><![CDATA[if (!$context['make_event'] && $drafts_template_loaded !== false)
+		template_drafts_post_list_of_drafts();
+	
+	]]></add>
+
+	</operation>
+		
+</file>
+
+
+<file name="$themedir/style.css">
+
+	<operation>
+		
+<search position="end"></search>
+
+<add><![CDATA[
+/*  Drafts Modification for SMF 2.0/1.1  */
+#drafts-success{color:green; margin:1ex 0 2ex 3ex;}
+/*  Drafts Modification for SMF 2.0/1.1  */
+]]></add>
+
+	</operation>
+		
+</file>
+
+
+</modification>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	
+
+	<name>Drafts (for SMF 2.0 / SMF 1.1)</name>
+	<id>charlesh:drafts</id>
+	<version>2.0.1</version>
+	<type>modification</type>
+
+	<install for="1.1 - 1.1.99">
+	
+		<!-- Read me -->
+		<readme type="inline">This will install Drafts 2.0.1 for SMF 1.1.</readme>
+		
+		<!-- Modifications -->
+		<modification format="xml" type="file">install1-1.xml</modification>
+		
+		<!-- Source files -->
+		<require-file name="smf1-1/Sources/Drafts.php" destination="$sourcedir" />
+		
+		<!-- Theme files -->
+		<require-file name="smf1-1/Themes/default/Drafts.template.php" destination="$themedir" />
+		<require-file name="images/icons/edit.gif" destination="$themedir/images/icons" />
+		
+		<!-- Language files -->
+		<require-file name="languages/Drafts.english.php" destination="$languagedir" />
+		<require-file name="languages/Drafts.english-utf8.php" destination="$languagedir" />
+		
+		<!-- Install scripts -->
+		<code>install1-1.php</code>
+		
+	</install>
+
+	<install for="2.0 - 2.99.99">
+	
+		<!-- Read me -->
+		<readme type="inline">This will install Drafts 2.0.1 for SMF 2.0.</readme>
+		
+		<!-- Modifications -->
+		<modification format="xml" type="file">install2.xml</modification>
+		
+		<!-- Source files -->
+		<require-file name="smf2/Sources/Drafts.php" destination="$sourcedir" />
+		
+		<!-- Theme files -->
+		<require-file name="smf2/Themes/default/Drafts.template.php" destination="$themedir" />
+		<require-file name="images/icons/edit.gif" destination="$themedir/images/icons" />
+		
+		<!-- Language files -->
+		<require-file name="languages/Drafts.english.php" destination="$languagedir" />
+		<require-file name="languages/Drafts.english-utf8.php" destination="$languagedir" />
+		
+		<!-- Install scripts -->
+		<database>install2.php</database>
+		
+	</install>
+
+	<uninstall for="1.1 - 1.1.99">
+	
+		<!-- Read me -->
+		<readme type="inline">This will uninstall Drafts 2.0.1 for SMF 1.1.</readme>
+	
+		<!-- Modifications -->
+		<modification format="xml" type="file" reverse="true">install1-1.xml</modification>
+		
+		<!-- Source files -->
+		<remove-file name="$sourcedir/Drafts.php" />
+		
+		<!-- Theme files -->
+		<remove-file name="$themedir/Drafts.template.php" />
+		<remove-file name="$themedir/images/icons/edit.gif" />
+		
+		<!-- Language files -->
+		<remove-file name="$languagedir/Drafts.english.php" />
+		<remove-file name="$languagedir/Drafts.english-utf8.php" />
+		
+	</uninstall>
+
+	<uninstall for="2.0 - 2.99.99">
+	
+		<!-- Read me -->
+		<readme type="inline">This will uninstall Drafts 2.0.1 for SMF 2.0.</readme>
+	
+		<!-- Modifications -->
+		<modification format="xml" type="file" reverse="true">install2.xml</modification>
+		
+		<!-- Source files -->
+		<remove-file name="$sourcedir/Drafts.php" />
+		
+		<!-- Theme files -->
+		<remove-file name="$themedir/Drafts.template.php" />
+		<remove-file name="$themedir/images/icons/edit.gif" />
+		
+		<!-- Language files -->
+		<remove-file name="$languagedir/Drafts.english.php" />
+		<remove-file name="$languagedir/Drafts.english-utf8.php" />
+		
+	</uninstall>
+
+</package-info>
