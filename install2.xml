@@ -259,6 +259,27 @@
 
 </file>
 
+	<file name="$sourcedir/Display.php"><!-- enable draft saving for quick reply box -->
+		<operation>
+			<search position="before"><![CDATA[// Cleanup all the permissions with extra stuff...]]></search>
+			<add><![CDATA[
+	$context['save_draft'] = $context['can_reply'] && allowedTo('save_drafts');]]></add>
+		</operation>
+	</file>
+
+	<file name="$themedir/Display.template.php">
+		<operation><!-- add the button for quick reply to be able to save draft -->
+			<search position="after"><![CDATA[			if ($context['show_spellchecking'])]]></search>
+			<add><![CDATA[			// Add drafts
+			if (!empty($context['save_draft']))
+				echo '
+		<input type="hidden" name="drafts-save_as_draft" id="drafts-save_as_draft" value="0" />
+		<input type="submit" onclick="document.getElementById(\'drafts-save_as_draft\').value = \'1\';" value="', $txt['drafts'][14], '" class="button_submit" />';
+
+]]></add>
+		</operation>
+	</file>
+
 
 <file name="$themedir/css/index.css">
 
