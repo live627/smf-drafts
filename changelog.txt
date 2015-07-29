@@ -1,25 +1,32 @@
 Changes go downward, versions go upward.  Please scroll to the bottom for a legend.
 Changelog started July 31, 2010.
-Changelog last updated December 1, 2014.
+Changelog last updated July 29, 2014.
 
+
+2.2
+================================================================================
++ Added "Save as Draft" button to Quick Reply
++ Added pl_PL (thanks Nolt)
++ Added ru_RU (thanks Bugo)
++ Added uk_UA (thanks Crazy_Nick)
 
 2.1
 ================================================================================
-! Users could see each others' drafts in the profile area 
-- Remove support for SMF 1.1.x 
-+ Added it_it (thanks Flavio93Zena) 
-! Wrong variable used (thanks TourFL) 
-+ Added pt_br (thanks DSystem) 
+! Users could see each others' drafts in the profile area
+- Remove support for SMF 1.1.x
++ Added it_it (thanks Flavio93Zena)
+! Wrong variable used (thanks TourFL)
++ Added pt_br (thanks DSystem)
 
 2.0.5
 ================================================================================
-! Parse error in template (thanks @emanuele45)
+! Parse error in template (thanks emanuele)
 
 2.0.4
 ================================================================================
 ! An icon was misaligned
-! Several areas used the wrong URL
-! Wrong column name in a query
+! Several areas used the wrong URL (thanks msauser2)
+! Wrong column name in a query (thanks emanuele)
 
 2.0.3
 ================================================================================
